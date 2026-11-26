@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetCare | Saúde e rotina do seu pet</title>
+  <meta name="description" content="Controle vacinas, consultas, remédios e alimentação dos seus pets, com alertas de datas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1 class="marca"><span aria-hidden="true">🐾</span> Pet<b>Care</b></h1>
+    <nav class="pets" id="pets" aria-label="Seus pets"></nav>
+  </header>
+
+  <main class="layout">
+    <section class="perfil" id="perfil" aria-live="polite"></section>
+
+    <section class="alertas" id="alertas" aria-label="Alertas"></section>
+
+    <section class="painel">
+      <div class="painel__topo">
+        <div class="abas" role="tablist" aria-label="Categorias">
+          <button role="tab" data-aba="todos" aria-selected="true">Tudo</button>
+          <button role="tab" data-aba="vacina" aria-selected="false">💉 Vacinas</button>
+          <button role="tab" data-aba="consulta" aria-selected="false">🩺 Consultas</button>
+          <button role="tab" data-aba="remedio" aria-selected="false">💊 Remédios</button>
+          <button role="tab" data-aba="alimentacao" aria-selected="false">🥣 Alimentação</button>
+        </div>
+        <button class="btn" id="novo-reg">+ Registrar</button>
+      </div>
+      <ol class="linha-tempo" id="linha"></ol>
+    </section>
+  </main>
+
+  <dialog id="dlg-pet" aria-labelledby="dp-titulo">
+    <form method="dialog" class="form" id="form-pet">
+      <div class="form__topo"><h2 id="dp-titulo">Novo pet</h2><button class="fechar" value="cancelar" formnovalidate aria-label="Fechar">×</button></div>
+      <div class="especies" role="radiogroup" aria-label="Espécie" id="p-especies"></div>
+      <div class="grade">
+        <label>Nome*<input id="p-nome" required maxlength="24"></label>
+        <label>Raça<input id="p-raca" maxlength="30" placeholder="SRD, Golden..."></label>
+        <label>Nascimento<input type="date" id="p-nasc"></label>
+        <label>Peso (kg)<input type="number" id="p-peso" min="0" max="150" step="0.1"></label>
+        <label>Sexo<select id="p-sexo"><option value="">—</option><option>Macho</option><option>Fêmea</option></select></label>
+        <label>Castrado<select id="p-castrado"><option value="">—</option><option>Sim</option><option>Não</option></select></label>
+      </div>
+      <div class="form__rodape">
+        <button type="button" class="btn perigo" id="excluir-pet" hidden>Excluir pet</button><span></span>
+        <button class="btn claro" value="cancelar" formnovalidate>Cancelar</button><button class="btn" value="salvar">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-reg" aria-labelledby="dr-titulo">
+    <form method="dialog" class="form" id="form-reg">
+      <div class="form__topo"><h2 id="dr-titulo">Novo registro</h2><button class="fechar" value="cancelar" formnovalidate aria-label="Fechar">×</button></div>
+      <div class="tipos" role="radiogroup" aria-label="Tipo de registro">
+        <label><input type="radio" name="tipo" value="vacina" checked><span>💉<b>Vacina</b></span></label>
+        <label><input type="radio" name="tipo" value="consulta"><span>🩺<b>Consulta</b></span></label>
+        <label><input type="radio" name="tipo" value="remedio"><span>💊<b>Remédio</b></span></label>
+        <label><input type="radio" name="tipo" value="alimentacao"><span>🥣<b>Alimentação</b></span></label>
+      </div>
+      <label>Descrição*<input id="r-titulo" required maxlength="60" list="sugestoes"></label>
+      <datalist id="sugestoes"></datalist>
+      <div class="grade">
+        <label id="r-data-label">Data*<input type="date" id="r-data" required></label>
+        <label id="r-prox-label">Próxima dose / retorno<input type="date" id="r-prox"></label>
+        <label class="so-remedio">Dosagem<input id="r-dose" maxlength="40" placeholder="Ex.: 1 comprimido"></label>
+        <label class="so-remedio">Frequência<select id="r-freq"><option value="0">Dose única</option><option value="8">A cada 8 horas</option><option value="12">A cada 12 horas</option><option value="24">1 vez ao dia</option><option value="168">1 vez por semana</option><option value="720">1 vez por mês</option></select></label>
+        <label class="so-remedio">Até<input type="date" id="r-fim"></label>
+        <label class="so-consulta">Veterinário(a) / clínica<input id="r-vet" maxlength="50"></label>
+        <label class="so-consulta">Valor (R$)<input type="number" id="r-valor" min="0" step="0.01"></label>
+        <label class="so-alim">Quantidade por refeição<input id="r-qtd" maxlength="30" placeholder="Ex.: 120 g"></label>
+        <label class="so-alim">Horários<input id="r-horarios" maxlength="40" placeholder="Ex.: 8h e 19h"></label>
+      </div>
+      <label>Observações<textarea id="r-obs" rows="2" maxlength="300"></textarea></label>
+      <div class="form__rodape">
+        <button type="button" class="btn perigo" id="excluir-reg" hidden>Excluir</button><span></span>
+        <button class="btn claro" value="cancelar" formnovalidate>Cancelar</button><button class="btn" value="salvar">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="js/script.js"></script>
+</body>
+</html>

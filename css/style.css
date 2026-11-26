@@ -1,0 +1,113 @@
+/* PetCare — tons quentes, cantos bem arredondados */
+:root {
+  --fundo: #fdf6ee;
+  --cartao: #ffffff;
+  --tinta: #3a2a1e;
+  --suave: #8a7462;
+  --linha: #f0e3d4;
+  --laranja: #f07a2c;
+  --laranja-claro: #ffe8d6;
+  --raio: 24px;
+}
+[hidden] { display: none !important; }
+* { box-sizing: border-box; min-width: 0; }
+body { margin: 0; background: var(--fundo); color: var(--tinta); font: 16px/1.5 "Nunito", system-ui, sans-serif; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--laranja); outline-offset: 2px; }
+
+.topo { max-width: 1100px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.marca { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -.01em; }
+.marca b { color: var(--laranja); font-weight: 900; }
+.pets { display: flex; gap: 8px; overflow-x: auto; padding: 4px; }
+.pet-btn { display: flex; align-items: center; gap: 8px; border: 2px solid transparent; background: var(--cartao); border-radius: 999px; padding: 4px 14px 4px 4px; cursor: pointer; font-weight: 700; white-space: nowrap; }
+.pet-btn[aria-pressed="true"] { border-color: var(--laranja); background: var(--laranja-claro); }
+.pet-btn .emoji { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--fundo); font-size: 20px; }
+.pet-btn.novo { padding: 8px 14px; color: var(--laranja); border: 2px dashed #f3c6a4; background: none; }
+.pet-btn .ponto { width: 8px; height: 8px; border-radius: 50%; background: #e03131; }
+
+.layout { max-width: 1100px; margin: 0 auto; padding: 0 20px 50px; display: grid; grid-template-columns: 320px 1fr; gap: 18px; align-items: start; }
+.perfil { grid-row: span 2; background: var(--cartao); border-radius: var(--raio); padding: 22px; text-align: center; position: sticky; top: 16px; }
+.avatar { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 10px; display: grid; place-items: center; font-size: 60px; background: radial-gradient(circle at 30% 30%, #fff, var(--laranja-claro)); box-shadow: 0 0 0 6px var(--fundo); }
+.perfil h2 { margin: 0; font-size: 26px; font-weight: 900; }
+.perfil .sub { margin: 0 0 14px; color: var(--suave); }
+.fichas { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; }
+.ficha { background: var(--fundo); border-radius: 14px; padding: 8px 12px; }
+.ficha small { display: block; color: var(--suave); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.ficha b { font-weight: 800; }
+.peso-hist { margin-top: 14px; text-align: left; }
+.peso-hist h3 { margin: 0 0 4px; font-size: 14px; color: var(--suave); }
+.peso-hist svg { width: 100%; height: 70px; display: block; }
+.editar-pet { margin-top: 14px; border: 0; background: none; color: var(--laranja); font-weight: 800; cursor: pointer; }
+
+.alertas { display: grid; gap: 8px; }
+.alerta { display: flex; align-items: center; gap: 12px; border-radius: 18px; padding: 12px 16px; background: var(--cartao); border-left: 6px solid var(--c); }
+.alerta .ic { font-size: 22px; }
+.alerta b { display: block; }
+.alerta small { color: var(--suave); }
+.alerta .acao { margin-left: auto; border: 0; background: var(--fundo); border-radius: 999px; padding: 6px 12px; font-weight: 700; cursor: pointer; white-space: nowrap; font-size: 14px; }
+.alerta.atrasado { --c: #e03131; background: #fff1f1; }
+.alerta.breve { --c: #f59f00; }
+.alerta.ok { --c: #2f9e44; }
+
+.painel { background: var(--cartao); border-radius: var(--raio); padding: 18px; }
+.painel__topo { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.abas { display: flex; gap: 4px; overflow-x: auto; max-width: 100%; }
+.abas button { flex: none; border: 0; background: none; border-radius: 999px; padding: 6px 12px; font-weight: 700; color: var(--suave); cursor: pointer; white-space: nowrap; font-size: 15px; }
+.abas button[aria-selected="true"] { background: var(--tinta); color: #fff; }
+.btn { border: 0; border-radius: 999px; background: var(--laranja); color: #fff; padding: 10px 18px; font-weight: 800; cursor: pointer; }
+.btn:hover { filter: brightness(1.06); }
+.btn.claro { background: var(--fundo); color: var(--tinta); }
+.btn.perigo { background: #fff1f1; color: #c92a2a; }
+
+.linha-tempo { list-style: none; margin: 0; padding: 0 0 0 22px; position: relative; }
+.linha-tempo::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--linha); }
+.mes { margin: 14px 0 6px -22px; font-size: 13px; font-weight: 800; color: var(--suave); text-transform: uppercase; letter-spacing: .06em; }
+  .mes { position: relative; background: var(--cartao); width: max-content; padding: 2px 8px 2px 0; }
+.mes:first-child { margin-top: 0; }
+.reg { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 10px 12px; border-radius: 16px; cursor: pointer; margin-bottom: 4px; }
+.reg:hover { background: var(--fundo); }
+.reg::before { content: ""; position: absolute; left: -21px; top: 16px; width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px var(--cartao); }
+.reg b { font-weight: 800; }
+.reg .data { color: var(--suave); font-size: 14px; white-space: nowrap; }
+.reg .det { grid-column: 1 / -1; color: var(--suave); font-size: 14px; }
+.reg .det .prox { background: var(--laranja-claro); color: #a14a0f; border-radius: 6px; padding: 0 6px; font-weight: 700; }
+.reg .det .prox.atrasado { background: #ffe3e3; color: #c92a2a; }
+.vazio { color: var(--suave); text-align: center; padding: 30px 10px; margin-left: -22px; }
+
+dialog { border: 0; border-radius: 26px; padding: 0; width: min(540px, calc(100% - 20px)); max-height: calc(100vh - 20px); }
+dialog::backdrop { background: rgba(58, 42, 30, .45); }
+.form { padding: 20px; display: grid; gap: 12px; }
+.form__topo { display: flex; justify-content: space-between; align-items: center; }
+.form h2 { margin: 0; font-weight: 900; }
+.fechar { border: 0; background: var(--fundo); width: 36px; height: 36px; border-radius: 50%; font-size: 22px; cursor: pointer; }
+.grade { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form label { display: grid; gap: 4px; font-size: 13px; font-weight: 700; color: var(--suave); }
+.form input:not([type="radio"]), .form select, .form textarea { border: 2px solid var(--linha); border-radius: 12px; padding: 8px 11px; background: #fffdfa; width: 100%; color: var(--tinta); font-weight: 600; }
+.form textarea { resize: vertical; }
+.especies, .tipos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.especies label, .tipos label { cursor: pointer; }
+.especies input, .tipos input { position: absolute; opacity: 0; }
+.especies span, .tipos span { display: grid; place-items: center; gap: 2px; border: 2px solid var(--linha); border-radius: 16px; padding: 8px 4px; font-size: 26px; }
+.especies span b, .tipos span b { font-size: 13px; color: var(--tinta); }
+.especies input:checked + span, .tipos input:checked + span { border-color: var(--laranja); background: var(--laranja-claro); }
+.especies input:focus-visible + span, .tipos input:focus-visible + span { outline: 3px solid var(--laranja); }
+.form__rodape { display: grid; grid-template-columns: auto 1fr auto auto; gap: 8px; }
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--tinta); color: #fff; font-weight: 700; padding: 10px 18px; border-radius: 999px; z-index: 40; }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  .perfil { position: static; grid-row: auto; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; text-align: left; align-items: center; }
+  .perfil .avatar { width: 80px; height: 80px; font-size: 44px; margin: 0; grid-row: span 2; }
+  .perfil .fichas, .perfil .peso-hist, .perfil .editar-pet { grid-column: 1 / -1; }
+  .perfil .sub { margin: 0; }
+  .fichas { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 560px) {
+  .topo, .layout { padding-left: 14px; padding-right: 14px; }
+  .fichas { grid-template-columns: 1fr 1fr; }
+  .grade { grid-template-columns: 1fr; }
+  .painel { padding: 14px; }
+  .painel__topo .btn { width: 100%; }
+  .alerta { flex-wrap: wrap; }
+  .alerta .acao { margin-left: 34px; }
+}
